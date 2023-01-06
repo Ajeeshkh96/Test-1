@@ -1,0 +1,36 @@
+{% extends 'user_base.html' %}
+{% load static %}
+{% block title %}Hello User{% endblock %}
+{% block body %}
+<center>
+        <!-- <h2><font color="#366092">Welcome {{ uname}}</font></h2> -->
+
+<div class="container">
+        <form role="form" name="frm" action="product_search" method="post">
+          {% csrf_token %}
+          <br><br>
+<div>
+  
+  <input type="text" name="price" placeholder="price">
+  <button type="submit" style="color: black;background-color: chartreuse;">Search</button>
+</div>
+<br><br>
+</form>
+</div>
+
+
+{% for p in pr_l%}
+<div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="../static/media/{{ p.pic }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">model : {{p.product_name}}</h5>
+          <!-- <p class="card-text"><h5>features : </h5>{{p.description}}</p> -->
+          <h5 class="card-text">Price : {{p.price}}</h5>
+          <a href="../user_shopping_cart_add?product_id={{p.id}}" class="btn btn-primary">Add to Cart</a>
+        <h5 style="color: green;">{{msg}}</h5>
+        </div>
+      </div>
+{%endfor%}
+
+</center>
+{% endblock %}
