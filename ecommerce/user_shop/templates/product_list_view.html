@@ -1,0 +1,12 @@
+{% for p in pr_l%}
+<div class="card" id="pro" style="width: 10rem;" onchange="loadDistrict()">
+        <img class="card-img-top" src="../static/media/{{ p.pic }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">model : {{p.product_name}}</h5>
+          <!-- <p class="card-text"><h5>features : </h5>{{p.description}}</p> -->
+          <h5 class="card-text">Price : {{p.price}}</h5>
+          <a href="../user_shopping_cart_add?product_id={{p.id}}" class="btn btn-primary">Add to Cart</a>
+        <h5 style="color: green;">{{msg}}</h5>
+        </div>
+      </div>
+{%endfor%}

@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -294,15 +295,43 @@ def  seller_details_add(request):
 
 
 def product_search(request):
-    if request.method == 'POST':
-        price = request.POST.get('price')
-        pd = ''
-        try:
-            pd = product_master.objects.filter(price=price)
-        except:
-            pass
-        context  = {'pr_l': pd}
-        return render(request, 'user_home.html', context)
-        
-    else:
-        return render(request, 'user_home.html')
+    pd = product_master.objects.all()
+    context  = {'pr_l': pd}
+    return render(request, 'user_home.html', context)
+
+
+
+
+# from django.views.generic import View
+# from django.core import serializers
+
+# class ProductSearch(View):
+#      def get(self, request):
+#           product_name = request.GET.get('product_name', None)
+#           price = request.GET.get('price', None)
+
+#           # The base query takes all products
+#           product = product_master.objects.all()
+
+#           # If a filter param is passed, we use it to filter
+#           if product_name:
+#               product = product.filter(product_name=product_name)
+#           if price:
+#               product = product.filter(price=price)
+
+#           # Here you need to convert to JSON
+#           products_json = serializers.serialize("json", product_master.objects.all())
+
+#           return HTTPResponse(products_json)
+
+
+
+
+##########Ajax Pages##############
+def product_list_view(request):
+    price1 = int(request.GET.get('price1'))
+    price2 = int(request.GET.get('price2'))
+    
+    pr_l = product_master.objects.filter(price__gte=price1,price__lte =price2)
+    context = {'pr_l':pr_l}
+    return render(request, 'product_list_view.html',context)

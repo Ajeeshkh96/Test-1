@@ -50,4 +50,7 @@ urlpatterns = [
 
     path('product_search', views.product_search, name='product_search'),
 
+    path('product_list_view', views.product_list_view, name='product_list_view'),
+    
+
 ]
